@@ -3,16 +3,46 @@
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
-    // Extra safety for array and object lookups, but may have false positives.
+    // 必須處理 undefined 否則編譯不通過
     "noUncheckedIndexedAccess": true,
-
-    // Path mapping for cleaner imports.
+    // 設定路徑別名
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"] // 開發時可用 @/ 代替相對路徑
     },
+    // 建立快取檢查，之後只檢查有修改過的檔案
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
 
-    // `vue-tsc --build` produces a .tsbuildinfo file for incremental type-checking.
-    // Specified here to keep it out of the root directory.
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo"
+    // 使 typescript 與 ECMAScript 的保持一致
+    "target": "ES2022",
+    // 強制使用 ECMAScript 標準的 Class 欄位行為
+    "useDefineForClassFields": true,
+    // 輸出最新的 ESM 模組
+    "module": "ESNext",
+    // 告訴 TS 環境中可用的 API 類型定義
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    // 跳過 node_modules 內第三方套件的型別檢查
+    "skipLibCheck": true,
+
+    // 配合 Vite 等工具，使用現代模組解析路徑方式
+    "moduleResolution": "bundler",
+    // 允許在 import 路徑中使用 .ts 後綴
+    "allowImportingTsExtensions": true,
+    // 保持原始模組語法，防止編譯器意外改寫 import/export
+    "verbatimModuleSyntax": true,
+    // 強制將所有檔案視為獨立模組，避免全域變數污染
+    "moduleDetection": "force",
+    // 只做型別檢查，不產生 .js 檔案（由 Vite 負責產出）
+    "noEmit": true,
+
+    // 嚴格型別檢查
+    "strict": true,
+    // 可使用 Enum/Namespace
+    "erasableSyntaxOnly": false,
+    // 禁止 switch case 忘記寫 break
+    "noFallthroughCasesInSwitch": true,
+    // 檢查引用（如 import 'style.css'）路徑是否正確
+    "noUncheckedSideEffectImports": true,
+    // 禁止定義卻未使用的參數
+    "noUnusedParameters": true
   }
 }
