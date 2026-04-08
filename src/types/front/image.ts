@@ -11,8 +11,8 @@ export type ImageDetail = Image & {
     nickName: string;
     avatarImgUrl: string;
   };
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 };
 
 export type DelImageResponse = {

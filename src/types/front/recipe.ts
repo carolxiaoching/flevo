@@ -19,8 +19,8 @@ export type Recipe = {
   cookingTime: '0-15 分鐘' | '15-30 分鐘' | '30 分鐘以上' | '60 分鐘以上';
   description: string;
   servings: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Date | string;
+  updatedAt: Date | string;
   tags: string[];
   collectsCount: number;
   isRecommended: boolean;
