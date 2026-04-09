@@ -1,0 +1,12 @@
+.contactBanner {
+  min-height: 6rem;
+  background: transparent url('@/assets/images/contact-cover.webp') center no-repeat;
+  background-size: cover;
+  @include media-breakpoint-up(md) {
+    min-height: 9rem;
+  }
+}
+
+.contactBannerOverLay {
+  background: rgba($dark, 0.3);
+}

@@ -1,0 +1,17 @@
+// 修改 bootstrap form 樣式
+
+.form-select:required:invalid {
+  color: $muted;
+}
+
+.form-select option[value=''][disabled] {
+  display: none;
+}
+
+.form-select option {
+  color: $gray-900;
+}
+
+.form-check-input {
+  height: 1.5rem;
+}

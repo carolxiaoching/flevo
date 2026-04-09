@@ -1,0 +1,20 @@
+// 修改原本 bootstrap primary 按鈕樣式
+.btn-primary {
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-hover-bg: var(--bs-secondary);
+  --bs-btn-hover-border-color: #{shade-color($secondary, 10%)};
+  --bs-btn-focus-shadow-rgb: var(--bd-secondary-rgb);
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  --bs-btn-active-bg: #{shade-color($secondary, 20%)};
+  --bs-btn-active-border-color: #{shade-color($secondary, 20%)};
+}
+
+// disabled 按鈕樣式設定
+.btn.disabled:disabled {
+  pointer-events: auto;
+  cursor: not-allowed;
+  &:active {
+    background-color: var(--bs-btn-disabled-bg);
+    border-color: var(--bs-btn-disabled-border-color);
+  }
+}

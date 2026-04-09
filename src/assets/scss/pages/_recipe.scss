@@ -1,0 +1,51 @@
+.recipeCover {
+  min-height: 18rem;
+}
+
+.collectBtn {
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.3);
+  }
+}
+
+/* 食譜步驟 */
+
+.step {
+  max-width: 18.5rem;
+  @include media-breakpoint-up(sm) {
+    max-width: 30rem;
+  }
+  @include media-breakpoint-up(md) {
+    max-width: 40rem;
+  }
+  @include media-breakpoint-up(xl) {
+    max-width: 50rem;
+  }
+}
+
+.stepList {
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0.5rem;
+    border-radius: 0.25rem;
+    background: $light;
+    z-index: -1;
+  }
+}
+
+.stepItem {
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+}
+
+.stepOrder {
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
