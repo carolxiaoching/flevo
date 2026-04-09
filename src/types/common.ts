@@ -1,3 +1,10 @@
+export type Pagination = {
+  totalPage: number;
+  currentPage: number;
+  hasPrev: boolean;
+  hasNext: boolean;
+};
+
 export type AppErrorResponse = {
   status: string;
   message: string;

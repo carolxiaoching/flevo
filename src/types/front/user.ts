@@ -1,11 +1,5 @@
+import type { Pagination } from '@/types/common';
 import type { Recipe } from '@/types/front/recipe';
-
-export type Pagination = {
-  totalPage: number;
-  currentPage: number;
-  hasPrev: boolean;
-  hasNext: boolean;
-};
 
 export type User = {
   _id: string;

@@ -1,9 +1,4 @@
-export type Pagination = {
-  totalPage: number;
-  currentPage: number;
-  hasPrev: boolean;
-  hasNext: boolean;
-};
+import type { Pagination } from '@/types/common';
 
 export type Recipe = {
   _id: string;
