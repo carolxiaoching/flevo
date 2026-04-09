@@ -1,35 +1,43 @@
-import { ref, onMounted } from 'vue';
-import type { Ref } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 import Modal from 'bootstrap/js/dist/modal';
+import type { Ref } from 'vue';
 
 // Modal
 export function useModal(modalRef: Ref<HTMLElement | null>) {
-  const modal = ref<Modal | null>(null);
+  let modal: Modal | null = null;
+
+  // 解決 Bootstrap Modal 關閉後焦點問題
+  // https://github.com/twbs/bootstrap/issues/41005
+  const handleHide = () => {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+  };
 
   onMounted(() => {
-    if (!modalRef.value) return;
+    if (modalRef.value) {
+      modal = new Modal(modalRef.value);
+      modalRef.value.addEventListener('hide.bs.modal', handleHide);
+    }
+  });
 
-    modal.value = new Modal(modalRef.value);
-
-    // 解決 Bootstrap Modal 關閉後焦點問題
-    // https://github.com/twbs/bootstrap/issues/41005
-    modalRef.value.addEventListener('hide.bs.modal', () => {
-      if (document.activeElement instanceof HTMLElement) {
-        document.activeElement.blur();
-      }
-    });
+  onUnmounted(() => {
+    if (modal) {
+      modalRef.value?.removeEventListener('hide.bs.modal', handleHide);
+      modal?.dispose();
+      modal = null;
+    }
   });
 
   const openModal = () => {
-    modal.value?.show();
+    modal?.show();
   };
 
   const hideModal = () => {
-    modal.value?.hide();
+    modal?.hide();
   };
 
   return {
-    modal,
     openModal,
     hideModal,
   };
