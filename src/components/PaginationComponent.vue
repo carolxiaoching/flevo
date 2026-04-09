@@ -6,6 +6,10 @@
   };
 
   const { pagination } = defineProps<PaginationProps>();
+
+  const emit = defineEmits<{
+    'update-page': [page: number];
+  }>();
 </script>
 
 <template>
@@ -16,7 +20,7 @@
           class="page-link rounded-circle"
           href="#"
           aria-label="Previous"
-          @click.prevent="$emit('update-page', pagination.currentPage - 1)"
+          @click.prevent="emit('update-page', pagination.currentPage - 1)"
           :disabled="!pagination.hasPrev"
         >
           <span>&laquo;</span>
@@ -28,14 +32,14 @@
         v-for="n in pagination.totalPage"
         :key="n"
       >
-        <a class="page-link rounded-circle" href="#" @click.prevent="$emit('update-page', n)">
+        <a class="page-link rounded-circle" href="#" @click.prevent="emit('update-page', n)">
           {{ n }}
         </a>
       </li>
       <li
         class="page-item"
         :class="{ disabled: !pagination.hasNext }"
-        @click.prevent="$emit('update-page', pagination.currentPage + 1)"
+        @click.prevent="emit('update-page', pagination.currentPage + 1)"
       >
         <a
           class="page-link rounded-circle"
