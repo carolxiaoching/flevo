@@ -1,6 +1,7 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
-import { loadingStore, messageStore } from './index.js';
+import loadingStore from './loadingStore';
+import messageStore from './messageStore';
 import { apiGetCategories } from '@/api/front/categories';
 import { apiGetTags } from '@/api/front/tags';
 import type { Tag } from '@/types/front/tag';

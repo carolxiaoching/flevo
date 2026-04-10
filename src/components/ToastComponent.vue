@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import messageStore from '@/stores/messageStore.js';
+  import { messageStore } from '@/stores';
   import { storeToRefs } from 'pinia';
 
   const messageRef = messageStore();

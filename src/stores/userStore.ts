@@ -1,6 +1,7 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
-import { loadingStore, messageStore } from './index.js';
+import loadingStore from './loadingStore';
+import messageStore from './messageStore';
 import { apiGetMyProfile } from '@/api/front/users';
 import { apiCreateCollect, apiDelCollect } from '@/api/front/recipes';
 import { getToken, clearToken } from '@/utils/auth';
