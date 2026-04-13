@@ -33,8 +33,17 @@ export function useModal(modalRef: Ref<HTMLElement | null>) {
     modal?.show();
   };
 
-  const hideModal = () => {
-    modal?.hide();
+  const hideModal = (): Promise<void> => {
+    return new Promise(resolve => {
+      // Bootstrap Modal 關閉後會自動將焦點移回觸發按鈕
+      // 監聽事件在 Modal 完全關閉後才 resolve Promise
+      if (modalRef.value) {
+        modalRef.value.addEventListener('hidden.bs.modal', () => resolve(), { once: true });
+      } else {
+        resolve();
+      }
+      modal?.hide();
+    });
   };
 
   return {
