@@ -88,6 +88,7 @@ export const apiGetUserRecipes = (
     category = '',
     keyword = '',
     tags = [],
+    isPublic,
   }: {
     page?: number;
     perPage?: number;
@@ -95,6 +96,7 @@ export const apiGetUserRecipes = (
     category?: string;
     keyword?: string;
     tags?: string[];
+    isPublic?: boolean;
   } = {},
 ): Promise<AxiosResponse<GetUserRecipesResponse>> =>
   recipeApi.get(`${API_PATH}/api/publicRecipes/user/${userId}`, {
@@ -105,6 +107,7 @@ export const apiGetUserRecipes = (
       category: category && category !== '全部' ? category : undefined,
       keyword: keyword ? keyword : undefined,
       tags: tags.length ? tags.join(',') : undefined,
+      isPublic: isPublic ?? undefined,
     },
   });
 
