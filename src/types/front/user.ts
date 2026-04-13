@@ -11,8 +11,8 @@ export type User = {
 
 export type UserDetail = User & {
   collects: string[];
-  createdAt: Date | string;
-  updatedAt: Date | string;
+  createdAt: string;
+  updatedAt: string;
   recipeCount: number;
   collectCount: number;
 };

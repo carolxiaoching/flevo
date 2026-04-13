@@ -1,5 +1,26 @@
 import type { Pagination } from '@/types/common';
 
+export type Ingredient = {
+  _id?: string;
+  ingredientName: string;
+  ingredientQty: string;
+};
+
+export type NutritionFacts = {
+  calories: number;
+  protein: number;
+  totalFat: number;
+  totalCarb: number;
+  sodium: number;
+  sugar: number;
+};
+
+export type Step = {
+  _id?: string;
+  stepOrder?: number;
+  stepContent: string;
+};
+
 export type Recipe = {
   _id: string;
   title: string;
@@ -14,33 +35,22 @@ export type Recipe = {
   cookingTime: '0-15 分鐘' | '15-30 分鐘' | '30 分鐘以上' | '60 分鐘以上';
   description: string;
   servings: number;
-  createdAt: Date | string;
-  updatedAt: Date | string;
+  createdAt: string;
+  updatedAt: string;
   tags: string[];
   collectsCount: number;
-  isRecommended: boolean;
+  isRecommended?: boolean;
 };
 
 export type RecipeDetail = Recipe & {
-  ingredients: {
-    _id: string;
-    ingredientName: string;
-    ingredientQty: string;
-  }[];
-  nutritionFacts: {
-    calories: number;
-    protein: number;
-    totalFat: number;
-    totalCarb: number;
-    sodium: number;
-    sugar: number;
-  };
-  steps: {
-    _id: string;
-    stepOrder: number;
-    stepContent: string;
-  }[];
+  ingredients: Ingredient[];
+  nutritionFacts: NutritionFacts;
+  steps: Step[];
   note: string;
+};
+
+export type RecipeFormData = CreateRecipeParams & {
+  _id?: string;
 };
 
 export type CreateRecipeParams = {
@@ -52,22 +62,9 @@ export type CreateRecipeParams = {
   cookingTime: '0-15 分鐘' | '15-30 分鐘' | '30 分鐘以上' | '60 分鐘以上';
   servings: number;
   category: string;
-  ingredients: {
-    ingredientName: string;
-    ingredientQty: string;
-  }[];
-  nutritionFacts: {
-    calories: number;
-    protein: number;
-    totalFat: number;
-    totalCarb: number;
-    sodium: number;
-    sugar: number;
-  };
-  steps: {
-    stepOrder: number;
-    stepContent: string;
-  }[];
+  ingredients: Ingredient[];
+  nutritionFacts: NutritionFacts;
+  steps: Step[];
   tags?: string[];
 };
 
