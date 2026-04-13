@@ -1,5 +1,7 @@
 // 修改原本 bootstrap primary 按鈕樣式
+
 .btn-primary {
+  --bs-btn-color: var(--bs-white);
   --bs-btn-hover-color: var(--bs-white);
   --bs-btn-hover-bg: var(--bs-secondary);
   --bs-btn-hover-border-color: #{shade-color($secondary, 10%)};
@@ -7,6 +9,14 @@
   --bs-btn-active-color: var(--bs-btn-hover-color);
   --bs-btn-active-bg: #{shade-color($secondary, 20%)};
   --bs-btn-active-border-color: #{shade-color($secondary, 20%)};
+}
+
+.btn-outline-primary {
+  --bs-btn-hover-color: var(--bs-white);
+}
+
+.btn-outline-secondary {
+  --bs-btn-active-color: var(--bs-white);
 }
 
 // disabled 按鈕樣式設定
