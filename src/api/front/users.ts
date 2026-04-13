@@ -27,7 +27,7 @@ userApi.interceptors.request.use(
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)flevoFront\s*=\s*([^;]*).*$)|^.*$/, '$1');
 
     if (token) {
-      request.headers['Authorization'] = token;
+      request.headers['Authorization'] = `Bearer ${token}`;
     }
 
     return request;
