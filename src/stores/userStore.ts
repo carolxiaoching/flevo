@@ -42,13 +42,10 @@ export default defineStore('userStore', () => {
 
   // 取得我的資料
   async function getMyProfile() {
-    loading.openLoading();
     try {
       const res = await apiGetMyProfile();
 
       updateMyProfile('update', res.data.data);
-
-      loading.closeLoading();
     } catch (err) {
       clearToken();
       updateMyProfile('reset');
@@ -58,7 +55,6 @@ export default defineStore('userStore', () => {
         title: '取得用戶資料失敗',
         text: (err as AppErrorResponse).message || '取得用戶資料失敗，請重新註冊',
       });
-      loading.closeLoading();
     }
   }
 
