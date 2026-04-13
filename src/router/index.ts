@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { getToken } from '@/utils/auth';
-import { messageStore, userStore } from '@/stores/index';
+import { messageStore, userStore } from '@/stores';
 
 const routes = [
   {
