@@ -28,12 +28,11 @@
 .heroBgImg {
   position: absolute;
   bottom: 0;
-  left: -5rem;
+  left: 0;
   max-width: 24rem;
   transform: rotate(-10deg);
   z-index: -1;
   @include media-breakpoint-up(sm) {
-    left: 0;
     max-width: 30rem;
   }
   @include media-breakpoint-up(lg) {
@@ -47,7 +46,8 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  min-height: 100vh;
+  min-height: calc(100vh - 3.625rem);
+  padding-top: 3.625rem;
 }
 
 .heroBtn {

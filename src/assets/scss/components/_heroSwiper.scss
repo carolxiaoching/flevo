@@ -1,10 +1,27 @@
+.heroSwiperArea {
+  min-height: 31rem;
+  @include media-breakpoint-up(xl) {
+    min-height: 36rem;
+    padding-top: 3rem;
+  }
+}
+
+.heroSwiperSkeleton {
+  height: 26rem;
+  border-radius: 0.75rem;
+  background: rgba(0, 0, 0, 0.05);
+
+  @include media-breakpoint-up(xl) {
+    height: 31rem;
+  }
+}
+
 .heroSwiperCover {
+  display: block;
   width: 100%;
-  min-height: 26rem;
+  height: 26rem;
   margin: 0 auto;
   object-fit: cover;
-  background-size: cover;
-  background-position: center;
   -webkit-mask-image: url('@/assets/images/icon/hero-mask.svg');
   mask-image: url('@/assets/images/icon/hero-mask.svg');
   mask-size: 100% 100%;
@@ -13,7 +30,7 @@
   transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 
   @include media-breakpoint-up(xl) {
-    min-height: 31rem;
+    height: 31rem;
   }
 }
 
