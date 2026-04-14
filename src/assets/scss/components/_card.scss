@@ -1,0 +1,81 @@
+.cardWrapper {
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.04);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.cardWrapper:hover {
+  transform: translateY(-0.5rem);
+  box-shadow: 0 1.25rem 3rem rgba(0, 0, 0, 0.08);
+}
+
+.cardImg {
+  height: 10.5rem;
+  width: 100%;
+  background-color: $light;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.1));
+  margin-bottom: 1.5rem;
+}
+
+.cardCollect {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+}
+
+.cardCollectBtn {
+  background: $light;
+  transition: all 0.3s ease-in-out;
+  color: $muted;
+
+  &:hover {
+    background: darken($light, 20%);
+    color: $white;
+  }
+}
+
+.cardDivider {
+  width: 2.5rem;
+  border-top: 2px solid $muted;
+  opacity: 1;
+  margin: 1rem 0;
+}
+
+.cardDesc {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// 直式卡片樣式
+
+.cardVerticalCover {
+  min-width: 18rem;
+  min-height: 12rem;
+}
+
+.cardVerticalCollect {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.cardVerticalCollectBtn {
+  background: $light;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background: darken($light, 10%);
+    color: $white;
+  }
+}
+
+.cardVerticalDelBtn {
+  background: $danger;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background: lighten($danger, 10%);
+  }
+}

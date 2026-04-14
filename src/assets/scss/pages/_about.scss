@@ -1,0 +1,92 @@
+.aboutBorn {
+  background-image: url('@/assets/images/about-born.webp');
+  @include media-breakpoint-up(xl) {
+    background-image: none;
+  }
+}
+
+.aboutVision {
+  background-image: url('@/assets/images/about-vision.webp');
+  @include media-breakpoint-up(xl) {
+    background-image: none;
+  }
+}
+
+.aboutMask {
+  background: rgba($light, 0.95);
+}
+
+/* 時間軸 */
+
+.timeline {
+  max-width: 60rem;
+}
+
+.timelineList {
+  &:before {
+    content: '';
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 0.5rem;
+    background-color: $light;
+    transform: translateX(-50%);
+    border-radius: 0.25rem;
+    z-index: -1;
+    @include media-breakpoint-up(lg) {
+      display: block;
+      padding: 2rem 0;
+    }
+  }
+}
+
+.timelineItem {
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.timelineItem:nth-child(odd) {
+  @include media-breakpoint-up(lg) {
+    flex-direction: row-reverse;
+    margin-right: calc(50% - 2.5rem);
+    .timelineContent {
+      margin-right: 2rem;
+    }
+  }
+}
+
+.timelineItem:nth-child(even) {
+  @include media-breakpoint-up(lg) {
+    flex-direction: row;
+    margin-left: calc(50% - 40px);
+    .timelineContent {
+      margin-left: 2rem;
+    }
+  }
+}
+
+.timelineYear {
+  min-width: 80px;
+}
+
+.timelineContent {
+  max-width: 21rem;
+  @include media-breakpoint-up(md) {
+    max-width: 26rem;
+  }
+  @include media-breakpoint-up(lg) {
+    max-width: none;
+  }
+}
+
+.timelineEvent {
+  margin-bottom: 1.5rem;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

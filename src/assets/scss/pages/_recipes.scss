@@ -1,0 +1,31 @@
+.recipesBanner {
+  min-height: 18rem;
+  position: relative;
+  background: transparent url('@/assets/images/recipe-banner.webp') center no-repeat;
+  background-size: cover;
+  @include media-breakpoint-up(xl) {
+    min-height: 20rem;
+    max-width: 80%;
+  }
+}
+
+.recipesBannerOverLay {
+  background: rgba($dark, 0.3);
+}
+
+.recipesBannerContent {
+  @include media-breakpoint-up(sm) {
+    min-width: 32rem;
+  }
+  @include media-breakpoint-up(lg) {
+    min-width: 38rem;
+  }
+}
+
+.recipesBannerTitle {
+  text-shadow: 1px 0 10px $dark;
+  font-size: 1.75rem;
+  @include media-breakpoint-up(sm) {
+    font-size: 2rem;
+  }
+}

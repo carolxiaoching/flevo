@@ -1,0 +1,10 @@
+.accountForm {
+  padding: 3.5rem 2.5rem;
+  @include media-breakpoint-up(sm) {
+    min-width: 30rem;
+  }
+  @include media-breakpoint-up(md) {
+    min-width: 38rem;
+    padding: 3.5rem;
+  }
+}
