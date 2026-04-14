@@ -44,6 +44,18 @@
 // Helpers
 @import 'bootstrap/scss/helpers';
 
+$utilities: map-merge(
+  $utilities,
+  (
+    'font-size': map-merge(
+        map-get($utilities, 'font-size'),
+        (
+          responsive: true,
+        )
+      ),
+  )
+);
+
 // Utilities
 @import 'bootstrap/scss/utilities/api';
 // scss-docs-end import-stack

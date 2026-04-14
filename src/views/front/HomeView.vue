@@ -229,7 +229,9 @@
           <div class="d-flex flex-column position-relative w-100">
             <div class="trendingTitle mb-12 mb-xl-18 text-end">
               <p class="mb-4">手作的溫度，美味的起點</p>
-              <h2 class="textLsSm font-semibold lh-base">新鮮剛出爐，<br />滿溢幸福滋味</h2>
+              <h2 class="textLsSm font-semibold lh-base fs-3 fs-lg-2">
+                新鮮剛出爐，<br />滿溢幸福滋味
+              </h2>
             </div>
 
             <div class="trendingMask trendingMask1"></div>
@@ -276,7 +278,9 @@
           <div class="d-flex flex-column position-relative w-100">
             <div class="trendingTitle mb-12 mb-xl-18 text-start">
               <p class="mb-4">大眾的選擇，好評的印證</p>
-              <h2 class="textLsSm font-semibold lh-base">人氣最經典，<br />吃過都說想念</h2>
+              <h2 class="textLsSm font-semibold lh-base fs-3 fs-lg-2">
+                人氣最經典，<br />吃過都說想念
+              </h2>
             </div>
 
             <div class="trendingMask trendingMask2"></div>
