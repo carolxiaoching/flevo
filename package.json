@@ -18,6 +18,7 @@
     "@popperjs/core": "^2.11.8",
     "@vee-validate/i18n": "^4.15.1",
     "@vee-validate/rules": "^4.15.1",
+    "apexcharts": "^5.10.6",
     "axios": "1.13.5",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.13.1",
@@ -31,6 +32,7 @@
     "vue-lazyload": "^3.0.0",
     "vue-loading-overlay": "^6.0.6",
     "vue-router": "^5.0.3",
+    "vue3-apexcharts": "^1.11.1",
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
