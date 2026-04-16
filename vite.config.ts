@@ -16,7 +16,7 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  base: process.env.NODE_ENV === 'production' ? '/flevo-frontend/' : '',
+  base: process.env.NODE_ENV === 'production' ? '/flevo/' : '',
   build: {
     target: 'es2022',
     // 解決部屬後找不到 _plugin-vue_export-helper 問題
