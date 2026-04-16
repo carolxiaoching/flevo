@@ -1,6 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import { getToken } from '@/utils/auth';
-import { messageStore, userStore } from '@/stores';
+import { getToken, clearToken } from '@/utils/auth';
+import { messageStore, userStore } from '@/stores/front';
+import { apiCheckLoginStatus } from '@/api/admin/adminUsers';
+import type { AppErrorResponse } from '@/types/common';
 
 const routes = [
   {
@@ -77,7 +79,59 @@ const routes = [
     ],
   },
   {
-    path: '/:pathMath(.*)*',
+    path: '/admin-signin',
+    name: 'adminSignin',
+    component: () => import('../views/admin/AdminSignin.vue'),
+  },
+  {
+    path: '/dashboard',
+    component: () => import('../views/admin/DashboardLayout.vue'),
+    meta: { requiresAdminAuth: true },
+    children: [
+      {
+        path: '',
+        name: 'overview',
+        component: () => import('../views/admin/OverView.vue'),
+      },
+      {
+        path: 'users',
+        name: 'adminUsers',
+        component: () => import('../views/admin/UsersView.vue'),
+      },
+      {
+        path: 'user/:id',
+        name: 'adminUserEdit',
+        component: () => import('../views/admin/UserEditView.vue'),
+      },
+      {
+        path: 'recipes',
+        name: 'adminRecipes',
+        component: () => import('../views/admin/RecipesView.vue'),
+      },
+      {
+        path: 'recipe/:id',
+        name: 'adminRecipeEdit',
+        component: () => import('../views/admin/RecipeEditView.vue'),
+      },
+      {
+        path: 'categories',
+        name: 'adminCategories',
+        component: () => import('../views/admin/CategoriesView.vue'),
+      },
+      {
+        path: 'tags',
+        name: 'adminTags',
+        component: () => import('../views/admin/TagsView.vue'),
+      },
+      {
+        path: 'images',
+        name: 'adminImages',
+        component: () => import('../views/admin/ImagesView.vue'),
+      },
+    ],
+  },
+  {
+    path: '/:pathMatch(.*)*',
     component: () => import('../views/NotFoundView.vue'),
   },
 ];
@@ -91,20 +145,43 @@ const router = createRouter({
   },
 });
 
-router.beforeEach(to => {
-  // 若無 token 且為需要登入的頁面，則轉址到登入頁面
-  const userRef = userStore();
-  const messageRef = messageStore();
+router.beforeEach(async to => {
   const token = getToken();
+  const messageRef = messageStore();
+  const { pushMessage } = messageRef;
 
+  // 前台：使用 token 判斷是否登入
   if (to.meta.requiresAuth && token === '') {
+    const userRef = userStore();
     userRef.checkLogin();
-    messageRef.pushMessage({
+    pushMessage({
       style: 'danger',
       title: '您尚未登入',
       text: '請先登入後再進行操作',
     });
-    router.push('/signIn');
+    router.push('/signin');
+  }
+
+  // 後台：打 API 驗證是否為管理員
+  if (to.meta.requiresAdminAuth) {
+    if (token === '') {
+      router.push('/admin-signin');
+      return;
+    }
+
+    try {
+      await apiCheckLoginStatus();
+    } catch (err) {
+      clearToken();
+
+      pushMessage({
+        style: 'danger',
+        title: '登入已失效',
+        text: (err as AppErrorResponse).message || '登入已失效，請重新登入',
+      });
+
+      router.push('/admin-signin');
+    }
   }
 });
 
