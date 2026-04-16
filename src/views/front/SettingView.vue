@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import { Form } from 'vee-validate';
   import { ref, watch, useTemplateRef } from 'vue';
   import { storeToRefs } from 'pinia';
   import { apiUpdateProfile, apiUpdatePassword } from '@/api/front/users';
@@ -14,7 +15,7 @@
   const { updateMyProfile } = userRef;
   const { myProfile } = storeToRefs(userRef);
 
-  const passwordFormRef = useTemplateRef<HTMLFormElement>('passwordFormRef');
+  const passwordFormRef = useTemplateRef<InstanceType<typeof Form>>('passwordFormRef');
   const currentTab = ref<string>('基本資料');
   const tempBasic = ref<{
     gender: 'male' | 'female' | 'secret';
@@ -147,7 +148,7 @@
         v-if="currentTab == '基本資料'"
         class="px-16 px-md-18 py-16 mx-auto bg-white shadow-sm rounded"
       >
-        <VForm ref="formRef" v-slot="{ errors, meta }" @submit="updateNewProfile(tempBasic)">
+        <VForm v-slot="{ errors, meta }" @submit="updateNewProfile(tempBasic)">
           <h2 class="title mb-11">
             <span class="titleIcon bg-secondary-subtle">
               <i class="bi bi-people-fill"></i>
@@ -222,10 +223,10 @@
             <label for="description" class="form-label"> 自我介紹： </label>
             <VField
               as="textarea"
+              id="description"
               type="text"
               rows="3"
               placeholder="請輸入自我介紹"
-              id="description"
               class="form-control"
               name="自我介紹"
               :class="{

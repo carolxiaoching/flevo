@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import { Form } from 'vee-validate';
   import { ref, useTemplateRef } from 'vue';
   import { useRouter } from 'vue-router';
   import { apiSignIn } from '@/api/front/users';
@@ -19,8 +20,7 @@
     email: '',
     password: '',
   });
-  const formRef = useTemplateRef<HTMLFormElement>('formRef');
-
+  const formRef = useTemplateRef<InstanceType<typeof Form>>('formRef');
   // 登入
   async function signIn() {
     openLoading();

@@ -1,5 +1,6 @@
 <script setup lang="ts">
   // 第三方套件
+  import { Form } from 'vee-validate';
   import { useRouter } from 'vue-router';
   import { onMounted, ref, onUnmounted, defineAsyncComponent, useTemplateRef } from 'vue';
   import { storeToRefs } from 'pinia';
@@ -114,14 +115,14 @@
 
   // 訂閱
   const alertModalRef = useTemplateRef<InstanceType<typeof AlertModal>>('alertModalRef');
-  const formRef = useTemplateRef<HTMLFormElement>('formRef');
+  const formRef = useTemplateRef<InstanceType<typeof Form>>('formRef');
   const subscriptionEmail = ref<string>('');
 
   function handleSubscriptionModal(show: boolean) {
     if (show) {
       alertModalRef.value?.openModal();
     } else {
-      formRef.value?.resetForm(); // 建議加個 ?. 避免尚未掛載時出錯
+      formRef.value?.resetForm();
       alertModalRef.value?.hideModal();
     }
   }
