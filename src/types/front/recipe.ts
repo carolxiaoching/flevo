@@ -49,10 +49,6 @@ export type RecipeDetail = Recipe & {
   note: string;
 };
 
-export type RecipeFormData = CreateRecipeParams & {
-  _id?: string;
-};
-
 export type CreateRecipeParams = {
   title: string;
   description: string;
@@ -69,6 +65,11 @@ export type CreateRecipeParams = {
 };
 
 export type UpdateRecipeParams = Partial<CreateRecipeParams>;
+
+export type RecipeFormData = CreateRecipeParams & {
+  _id?: string;
+  isRecommended?: boolean;
+};
 
 export type GetRecipesResponse = {
   status: string;
