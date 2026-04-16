@@ -4,7 +4,7 @@
   import { computed } from 'vue';
   import Loading from 'vue-loading-overlay';
   import 'vue-loading-overlay/dist/css/index.css';
-  import { loadingStore } from '@/stores';
+  import { loadingStore } from '@/stores/front';
   import Toast from '@/components/ToastComponent.vue';
 
   const loadingRef = loadingStore();

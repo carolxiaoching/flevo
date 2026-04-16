@@ -6,7 +6,7 @@
   import { useRouter, useRoute } from 'vue-router';
   import { storeToRefs } from 'pinia';
   import { clearToken } from '@/utils/auth';
-  import { messageStore, userStore } from '@/stores';
+  import { messageStore, userStore } from '@/stores/front';
 
   const router = useRouter();
   const route = useRoute();

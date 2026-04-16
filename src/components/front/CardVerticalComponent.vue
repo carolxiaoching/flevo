@@ -41,7 +41,7 @@
 
   const emit = defineEmits<{
     'toggle-collect': [{ active: 'create' | 'remove'; recipeId: string }];
-    'open-del-modal': [{ recipeId: string; recipeTitle: string }];
+    'open-del-modal': [{ id: string; title: string }];
   }>();
 </script>
 
@@ -71,7 +71,7 @@
       <a
         href="#"
         class="cardVerticalDelBtn d-block px-6 py-4 rounded-circle text-white"
-        @click.prevent="emit('open-del-modal', { recipeId: recipe._id, recipeTitle: recipe.title })"
+        @click.prevent="emit('open-del-modal', { id: recipe._id, title: recipe.title })"
       >
         <i class="bi bi-trash"></i>
       </a>
