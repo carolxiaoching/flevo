@@ -5,7 +5,7 @@
   import CardComponent from '@/components/front/CardComponent.vue';
   import PaginationComponent from '@/components/PaginationComponent.vue';
   import { apiGetRecipes } from '@/api/front/recipes';
-  import { messageStore, loadingStore, tagAndCategoryStore, userStore } from '@/stores';
+  import { messageStore, loadingStore, tagAndCategoryStore, userStore } from '@/stores/front';
   import type { Recipe } from '@/types/front/recipe';
   import type { AppErrorResponse, Pagination } from '@/types/common';
 

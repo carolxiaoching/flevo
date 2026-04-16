@@ -3,7 +3,7 @@
   import { useRouter } from 'vue-router';
   import { onMounted, ref, onUnmounted, defineAsyncComponent, useTemplateRef } from 'vue';
   import { storeToRefs } from 'pinia';
-  import { messageStore, loadingStore, tagAndCategoryStore } from '@/stores';
+  import { messageStore, loadingStore, tagAndCategoryStore } from '@/stores/front';
   import { apiGetRecipes } from '@/api/front/recipes';
   import type { AppErrorResponse } from '@/types/common';
   import type { Recipe } from '@/types/front/recipe';

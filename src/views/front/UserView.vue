@@ -6,10 +6,10 @@
   import { apiDelRecipe, apiGetMyRecipes, apiGetUserRecipes } from '@/api/front/recipes';
   import { getDaysDifference } from '@/utils/date';
   import AlertModal from '@/components/AlertModal.vue';
-  import DelModal from '@/components/front/DelModal.vue';
+  import DelModal from '@/components/DelModal.vue';
   import CardVerticalComponent from '@/components/front/CardVerticalComponent.vue';
   import PaginationComponent from '@/components/PaginationComponent.vue';
-  import { messageStore, loadingStore, tagAndCategoryStore, userStore } from '@/stores';
+  import { messageStore, loadingStore, tagAndCategoryStore, userStore } from '@/stores/front';
   import type { AppErrorResponse, Pagination } from '@/types/common';
   import type { Recipe } from '@/types/front/recipe';
   import type { UserDetail } from '@/types/front/user';
@@ -126,17 +126,17 @@
     }
   }
 
-  // 開啟 modal
+  // 關閉 alertModal
   function closeAlertModal() {
     alertModalRef.value?.hideModal();
     router.push('/');
   }
 
-  // 開啟 modal
-  function openDelModal({ recipeId, recipeTitle }: { recipeId: string; recipeTitle: string }) {
+  // 開啟 delModal
+  function openDelModal({ id, title }: { id: string; title: string }) {
     tempRecipe.value = {
-      id: recipeId,
-      title: recipeTitle,
+      id,
+      title,
     };
     delModalRef.value?.openModal();
   }
@@ -146,7 +146,7 @@
     openLoading();
     try {
       await apiDelRecipe(id);
-      getUserRecipes();
+      await getUserRecipes();
       tempRecipe.value = {
         id: '',
         title: '',

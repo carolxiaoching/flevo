@@ -2,8 +2,8 @@
   import { ref, watch, useTemplateRef } from 'vue';
   import { storeToRefs } from 'pinia';
   import { apiUpdateProfile, apiUpdatePassword } from '@/api/front/users';
-  import UploadComponent from '@/components/front/UploadComponent.vue';
-  import { messageStore, loadingStore, userStore } from '@/stores';
+  import UploadComponent from '@/components/UploadComponent.vue';
+  import { messageStore, loadingStore, userStore } from '@/stores/front';
   import type { AppErrorResponse } from '@/types/common';
 
   const userRef = userStore();

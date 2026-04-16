@@ -3,7 +3,7 @@
   import { useRouter } from 'vue-router';
   import { apiForgetPassword } from '@/api/front/users';
   import AlertModal from '@/components/AlertModal.vue';
-  import { messageStore, loadingStore } from '@/stores';
+  import { messageStore, loadingStore } from '@/stores/front';
   import type { AppErrorResponse } from '@/types/common';
 
   const router = useRouter();
@@ -50,7 +50,7 @@
 </script>
 
 <template>
-  <section class="d-flex flex-wrap justify-content-center aling-items-center my-17">
+  <section class="d-flex flex-wrap justify-content-center align-items-center my-17">
     <VForm
       class="accountForm bg-white rounded-3 shadow"
       v-slot="{ errors, meta }"

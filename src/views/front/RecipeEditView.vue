@@ -4,11 +4,11 @@
   import { useRoute, useRouter } from 'vue-router';
   import { apiGetRecipe, apiCreateRecipe, apiUpdateRecipe } from '@/api/front/recipes';
   import AlertModal from '@/components/AlertModal.vue';
-  import RecipeFormBasics from '@/components/front/RecipeFormBasics.vue';
-  import RecipeFormIngredients from '@/components/front/RecipeFormIngredients.vue';
-  import RecipeFormSteps from '@/components/front/RecipeFormSteps.vue';
-  import RecipeFormSubmit from '@/components/front/RecipeFormSubmit.vue';
-  import { loadingStore, messageStore, tagAndCategoryStore, userStore } from '@/stores';
+  import RecipeFormBasics from '@/components/RecipeFormBasics.vue';
+  import RecipeFormIngredients from '@/components/RecipeFormIngredients.vue';
+  import RecipeFormSteps from '@/components/RecipeFormSteps.vue';
+  import RecipeFormSubmit from '@/components/RecipeFormSubmit.vue';
+  import { loadingStore, messageStore, tagAndCategoryStore, userStore } from '@/stores/front';
   import type { RecipeDetail, RecipeFormData } from '@/types/front/recipe';
   import type { AppErrorResponse } from '@/types/common';
 

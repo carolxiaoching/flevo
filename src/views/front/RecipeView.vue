@@ -3,7 +3,7 @@
   import { storeToRefs } from 'pinia';
   import { useRoute, useRouter } from 'vue-router';
   import { apiGetRecipe, apiGetRecipes } from '@/api/front/recipes';
-  import { messageStore, loadingStore, tagAndCategoryStore, userStore } from '@/stores';
+  import { messageStore, loadingStore, tagAndCategoryStore, userStore } from '@/stores/front';
   import { getCategoryName, getTagName } from '@/utils/dataMap';
   import { getTime } from '@/utils/date';
   import AlertModal from '@/components/AlertModal.vue';
