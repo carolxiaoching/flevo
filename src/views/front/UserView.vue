@@ -67,6 +67,7 @@
         const res = await apiGetUserPublicProfile(userId.value);
         user.value = res.data.data;
       }
+      closeLoading();
     } catch (err) {
       pushMessage({
         style: 'danger',
