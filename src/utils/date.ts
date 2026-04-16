@@ -21,3 +21,20 @@ export function getDaysDifference(targetDateStr: string): number {
 
   return diffDays >= 0 ? diffDays : 0; // 避免未來日期返回負數
 }
+
+// 取得當月份前後六個月的陣列
+export function getMonthArray(): { year: number; month: number }[] {
+  const monthArray = [];
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth();
+  const currentYear = currentDate.getFullYear();
+
+  for (let i = -6; i <= 6; i++) {
+    const date = new Date(currentYear, currentMonth + i);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    monthArray.push({ year, month });
+  }
+
+  return monthArray;
+}

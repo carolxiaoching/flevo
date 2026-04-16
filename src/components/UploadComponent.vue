@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import { apiCreateImage } from '@/api/front/images';
-  import { messageStore, loadingStore } from '@/stores';
+  import { messageStore, loadingStore } from '@/stores/front';
   import type { AppErrorResponse } from '@/types/common';
 
   const loadingRef = loadingStore();
@@ -118,7 +118,7 @@
   <div v-else>
     <label for="image" class="w-100 mb-11 mb-xl-17 border rounded-3 overflow-hidden">
       <span
-        class="uploadLabelImage backgroundCover cursorPointer d-block"
+        class="uploadLabelImage backgroundCover cursorPointer d-block bg-light"
         :style="{ backgroundImage: `url(${tempImageUrl})` }"
         v-if="tempImageUrl"
       ></span>
@@ -127,13 +127,13 @@
         v-else
       >
         <i class="bi bi-cloud-arrow-up d-block display-3"></i>
-        點擊上傳{{ imageType === 'avatar' ? '頭像' : '封面' }}
+        點擊上傳{{ imageType === 'avatar' ? '頭像' : '圖片' }}
       </span>
     </label>
 
     <label for="image" class="d-block text-center">
       <span class="btn btn-primary w-75">
-        {{ imageType === 'avatar' ? '更新頭像' : '更新封面' }}
+        {{ imageType === 'avatar' ? '更新頭像' : '更新圖片' }}
       </span>
     </label>
   </div>

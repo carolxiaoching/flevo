@@ -1,32 +1,39 @@
 <script setup lang="ts">
   import { ref, onMounted, useTemplateRef } from 'vue';
-  import { storeToRefs } from 'pinia';
   import { useRoute, useRouter } from 'vue-router';
-  import { apiGetRecipe, apiCreateRecipe, apiUpdateRecipe } from '@/api/front/recipes';
+  import {
+    apiAdminGetRecipe,
+    apiAdminCreateRecipe,
+    apiAdminUpdateRecipe,
+  } from '@/api/admin/adminRecipes';
+  import { apiAdminGetCategories } from '@/api/admin/adminCategories';
+  import { apiAdminGetTags } from '@/api/admin/adminTags';
   import AlertModal from '@/components/AlertModal.vue';
   import RecipeFormBasics from '@/components/RecipeFormBasics.vue';
   import RecipeFormIngredients from '@/components/RecipeFormIngredients.vue';
   import RecipeFormSteps from '@/components/RecipeFormSteps.vue';
   import RecipeFormSubmit from '@/components/RecipeFormSubmit.vue';
-  import { loadingStore, messageStore, tagAndCategoryStore, userStore } from '@/stores/front';
-  import type { RecipeDetail, RecipeFormData } from '@/types/front/recipe';
+  import { loadingStore, messageStore } from '@/stores/admin';
   import type { AppErrorResponse } from '@/types/common';
+  import type { AdminRecipeDetail, AdminRecipeFormData } from '@/types/admin/adminRecipe';
+  import type { AdminCategory } from '@/types/admin/adminCategory';
+  import type { AdminTag } from '@/types/admin/adminTag';
 
   const router = useRouter();
   const route = useRoute();
-  const userRef = userStore();
-  const tagAndCategoryRef = tagAndCategoryStore();
-  const { myProfile } = storeToRefs(userRef);
-  const { categories, tags } = storeToRefs(tagAndCategoryRef);
-  const { getTagsAndCategories } = tagAndCategoryRef;
-  const { openLoading, closeLoading } = loadingStore();
-  const { pushMessage } = messageStore();
+  const loadingRef = loadingStore();
+  const messageRef = messageStore();
+  const { openLoading, closeLoading } = loadingRef;
+  const { pushMessage } = messageRef;
+
+  const categories = ref<AdminCategory[]>([]);
+  const tags = ref<AdminTag[]>([]);
 
   const step = ref<number>(1);
-  const recipe = ref<Partial<RecipeDetail>>({});
+  const recipe = ref<Partial<AdminRecipeDetail>>({});
   const alertModalRef = useTemplateRef<InstanceType<typeof AlertModal>>('alertModalRef');
   const submitErrorMsg = ref<string>('');
-  const tempRecipe = ref<RecipeFormData>({
+  const tempRecipe = ref<AdminRecipeFormData>({
     nutritionFacts: {
       calories: 0,
       protein: 0,
@@ -46,6 +53,7 @@
     steps: [{ stepContent: '' }],
     note: '',
     tags: [],
+    isRecommended: false,
   });
 
   async function submitRecipe() {
@@ -60,9 +68,9 @@
     try {
       openLoading();
       if (id) {
-        await apiUpdateRecipe(id, tempRecipe.value);
+        await apiAdminUpdateRecipe(id, tempRecipe.value);
       } else {
-        await apiCreateRecipe(tempRecipe.value);
+        await apiAdminCreateRecipe(tempRecipe.value);
       }
       alertModalRef.value?.openModal();
       closeLoading();
@@ -76,20 +84,16 @@
 
   async function closeSuccessModal() {
     await alertModalRef.value?.hideModal();
-    router.push('/recipes');
+    router.push('/dashboard/recipes');
   }
 
   async function getRecipe(id: string) {
     openLoading();
     try {
-      const res = await apiGetRecipe(id);
+      const res = await apiAdminGetRecipe(id);
       recipe.value = { ...res.data?.data };
       tempRecipe.value = JSON.parse(JSON.stringify(res.data?.data));
 
-      if (recipe.value.user?._id !== myProfile.value._id) {
-        pushMessage({ style: 'danger', title: '權限不足', text: '您無法編輯他人的食譜' });
-        router.push('/recipes');
-      }
       closeLoading();
     } catch (err) {
       pushMessage({
@@ -101,13 +105,33 @@
     }
   }
 
-  onMounted(async () => {
-    if (!tags.value.length || !categories.value.length) {
-      await getTagsAndCategories();
+  // 取得頁面所需資料
+  async function getInitData(id?: string) {
+    try {
+      const [tagsResponse, categoriesResponse] = await Promise.all([
+        apiAdminGetTags(),
+        apiAdminGetCategories(),
+      ]);
+
+      tags.value = tagsResponse.data.data;
+      categories.value = categoriesResponse.data.data;
+
+      if (id) {
+        await getRecipe(id);
+      }
+    } catch (err) {
+      pushMessage({
+        style: 'danger',
+        title: '載入失敗',
+        text: (err as AppErrorResponse).message || '載入失敗，請重整網頁',
+      });
     }
+  }
+
+  onMounted(async () => {
     const { id } = route.params;
-    if (typeof id === 'string' && id !== 'new') {
-      await getRecipe(id);
+    if (typeof id === 'string') {
+      await getInitData(id !== 'new' ? id : undefined);
     }
   });
 </script>
@@ -152,9 +176,12 @@
 
       <!-- ── STEP 1 ── -->
       <VForm v-if="step === 1" class="col-12 col-xxl-8" @submit="step = 2">
-        <RecipeFormBasics v-model="tempRecipe" :categories="categories" :tags="tags" />
+        <RecipeFormBasics v-model="tempRecipe" :categories="categories" :tags="tags" mode="admin" />
         <div class="d-flex flex-column flex-md-row align-items-center">
-          <router-link to="/recipes" class="btn btn-outline-primary w-100 mb-8 mb-md-0 me-md-16">
+          <router-link
+            to="/dashboard/recipes"
+            class="btn btn-outline-primary w-100 mb-8 mb-md-0 me-md-16"
+          >
             <i class="bi bi-arrow-90deg-left me-8"></i>返回食譜列表
           </router-link>
           <button type="submit" class="btn btn-primary w-100">下一步</button>
@@ -198,6 +225,7 @@
           :recipe="recipe"
           :categories="categories"
           :tags="tags"
+          mode="admin"
         />
 
         <div class="alert alert-danger mb-16" role="alert" v-if="submitErrorMsg">

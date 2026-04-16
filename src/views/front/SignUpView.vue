@@ -1,9 +1,10 @@
 <script setup lang="ts">
+  import { Form } from 'vee-validate';
   import { ref, useTemplateRef } from 'vue';
   import { useRouter } from 'vue-router';
   import { apiSignUp } from '@/api/front/users';
   import { setToken } from '@/utils/auth';
-  import { messageStore, loadingStore } from '@/stores';
+  import { messageStore, loadingStore } from '@/stores/front';
   import type { AppErrorResponse } from '@/types/common';
 
   const router = useRouter();
@@ -23,7 +24,7 @@
     confirmPassword: '',
     nickName: '',
   });
-  const formRef = useTemplateRef<HTMLFormElement>('formRef');
+  const formRef = useTemplateRef<InstanceType<typeof Form>>('formRef');
 
   // 註冊
   async function signUp() {
@@ -57,7 +58,7 @@
 </script>
 
 <template>
-  <section class="d-flex flex-wrap justify-content-center aling-items-center my-17">
+  <section class="d-flex flex-wrap justify-content-center align-items-center my-17">
     <VForm
       class="accountForm bg-white rounded-3 shadow"
       v-slot="{ errors, meta }"

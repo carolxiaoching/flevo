@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useFormErrors } from 'vee-validate';
-  import UploadComponent from '@/components/front/UploadComponent.vue';
+  import UploadComponent from '@/components/UploadComponent.vue';
   import type { Category } from '@/types/front/category';
   import type { Tag } from '@/types/front/tag';
   import type { RecipeFormData } from '@/types/front/recipe';
@@ -8,6 +8,7 @@
   type Props = {
     categories: Category[];
     tags: Tag[];
+    mode?: 'admin' | 'user';
   };
 
   const tempRecipe = defineModel<RecipeFormData>({ required: true });
@@ -15,6 +16,7 @@
   withDefaults(defineProps<Props>(), {
     categories: () => [],
     tags: () => [],
+    mode: 'user',
   });
 
   const errors = useFormErrors();
@@ -84,6 +86,27 @@
         <label class="form-check-label align-middle" for="isPublic">
           {{ tempRecipe.isPublic ? '目前為公開食譜' : '目前為私人食譜' }}
         </label>
+      </div>
+    </div>
+    <div v-if="mode === 'admin'" class="d-flex align-items-center">
+      <label for="isRecommended" class="form-label mb-0 me-16" style="min-width: 200px">
+        編輯推薦：
+      </label>
+      <div class="form-group form-check ps-0">
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="isRecommended"
+            v-model="tempRecipe.isRecommended"
+            :true-value="true"
+            :false-value="false"
+          />
+          <label class="form-check-label align-middle" for="isRecommended">
+            {{ tempRecipe.isRecommended ? '推薦' : '不推薦' }}
+          </label>
+        </div>
       </div>
     </div>
   </div>

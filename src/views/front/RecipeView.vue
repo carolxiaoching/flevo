@@ -3,7 +3,7 @@
   import { storeToRefs } from 'pinia';
   import { useRoute, useRouter } from 'vue-router';
   import { apiGetRecipe, apiGetRecipes } from '@/api/front/recipes';
-  import { messageStore, loadingStore, tagAndCategoryStore, userStore } from '@/stores';
+  import { messageStore, loadingStore, tagAndCategoryStore, userStore } from '@/stores/front';
   import { getCategoryName, getTagName } from '@/utils/dataMap';
   import { getTime } from '@/utils/date';
   import AlertModal from '@/components/AlertModal.vue';
@@ -86,7 +86,7 @@
       pushMessage({
         style: 'danger',
         title: '載入失敗',
-        text: (err as AppErrorResponse)?.message || '食譜載入失敗，請重整網頁',
+        text: (err as AppErrorResponse).message || '食譜載入失敗，請重整網頁',
       });
       closeLoading();
       router.push('/recipes');
@@ -106,7 +106,7 @@
       pushMessage({
         style: 'danger',
         title: '載入失敗',
-        text: (err as AppErrorResponse)?.message || '相關食譜載入失敗，請重整網頁',
+        text: (err as AppErrorResponse).message || '相關食譜載入失敗，請重整網頁',
       });
       closeLoading();
     }
@@ -150,7 +150,7 @@
               {{ getCategoryName(categories, recipe.category) }}
             </router-link>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">洋蔥炒牛肉</li>
+          <li class="breadcrumb-item active" aria-current="page">{{ recipe.title }}</li>
         </ol>
       </nav>
     </div>

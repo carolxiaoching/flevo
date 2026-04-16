@@ -8,6 +8,10 @@
   letter-spacing: 0.125rem;
 }
 
+.textLsLg {
+  letter-spacing: 0.5rem;
+}
+
 .backgroundCover {
   background-position: center;
   background-repeat: no-repeat;
@@ -35,4 +39,18 @@
 .textClampLg {
   -webkit-line-clamp: 5;
   height: 7.5rem;
+}
+
+.thumbnail {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  background-color: $light;
+  border-radius: 0.25rem;
+  text-align: center;
+  color: $white;
+  font-size: 2rem;
+  line-height: 3rem;
+  object-fit: cover;
+  object-position: center;
 }

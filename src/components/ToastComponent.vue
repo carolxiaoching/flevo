@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { messageStore } from '@/stores';
+  import { messageStore } from '@/stores/front';
   import { storeToRefs } from 'pinia';
 
   const messageRef = messageStore();
@@ -9,7 +9,7 @@
 
 <template>
   <div aria-live="polite" aria-atomic="true" class="position-relative overflow-hidden">
-    <div class="toastContainer mt-8 p-2 z-999">
+    <div class="toastContainer mt-18 p-2 z-999">
       <div
         class="toast show"
         role="alert"

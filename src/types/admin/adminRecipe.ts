@@ -21,7 +21,7 @@ export type Step = {
   stepContent: string;
 };
 
-export type Recipe = {
+export type AdminRecipe = {
   _id: string;
   title: string;
   coverImgUrl: string;
@@ -42,14 +42,14 @@ export type Recipe = {
   isRecommended?: boolean;
 };
 
-export type RecipeDetail = Recipe & {
+export type AdminRecipeDetail = AdminRecipe & {
   ingredients: Ingredient[];
   nutritionFacts: NutritionFacts;
   steps: Step[];
   note: string;
 };
 
-export type CreateRecipeParams = {
+export type AdminCreateRecipeParams = {
   title: string;
   description: string;
   note: string;
@@ -61,74 +61,48 @@ export type CreateRecipeParams = {
   ingredients: Ingredient[];
   nutritionFacts: NutritionFacts;
   steps: Step[];
-  tags?: string[];
+  tags: string[];
+  isRecommended: boolean;
 };
 
-export type UpdateRecipeParams = Partial<CreateRecipeParams>;
+export type AdminUpdateRecipeParams = Partial<AdminCreateRecipeParams>;
 
-export type RecipeFormData = CreateRecipeParams & {
+export type AdminRecipeFormData = AdminCreateRecipeParams & {
   _id?: string;
   isRecommended?: boolean;
 };
 
-export type GetRecipesResponse = {
+export type AdminGetRecipesResponse = {
+  status: string;
+  data: AdminRecipe[];
+};
+
+export type AdminGetRecipesPagedResponse = {
   status: string;
   data: {
-    results: Recipe[];
+    results: AdminRecipe[];
     pagination: Pagination;
   };
 };
 
-export type GetUserRecipesResponse = {
+export type AdminGetRecipeResponse = {
   status: string;
-  data: {
-    results: Recipe[];
-    pagination: Pagination;
-  };
+  data: AdminRecipeDetail;
 };
 
-export type GetRecipeResponse = {
+export type AdminCreateRecipeResponse = {
   status: string;
-  data: RecipeDetail;
-};
-
-export type GetMyRecipesResponse = {
-  status: string;
-  data: {
-    results: Recipe[];
-    pagination: Pagination;
-  };
-};
-
-export type CreateRecipeResponse = {
-  status: string;
-  data: Omit<RecipeDetail, 'user'> & {
+  data: Omit<AdminRecipeDetail, 'user'> & {
     user: string;
   };
 };
 
-export type UpdateRecipeResponse = {
+export type AdminUpdateRecipeResponse = {
   status: string;
-  data: RecipeDetail;
+  data: AdminRecipeDetail;
 };
 
-export type DelRecipeResponse = {
+export type AdminDelRecipeResponse = {
   status: string;
-  data: RecipeDetail;
-};
-
-export type CreateCollectResponse = {
-  status: string;
-  data: {
-    recipeId: string;
-    userId: string;
-  };
-};
-
-export type DelCollectResponse = {
-  status: string;
-  data: {
-    recipeId: string;
-    userId: string;
-  };
+  data: AdminRecipeDetail;
 };

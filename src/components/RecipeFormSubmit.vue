@@ -8,12 +8,14 @@
     recipe: Partial<RecipeDetail>;
     categories: Category[];
     tags: Tag[];
+    mode?: 'admin' | 'user';
   };
 
   withDefaults(defineProps<Props>(), {
     recipe: () => ({}),
     categories: () => [],
     tags: () => [],
+    mode: 'user',
   });
 
   const tempRecipe = defineModel<RecipeFormData>({ required: true });
@@ -74,6 +76,20 @@
               }"
             >
               {{ tempRecipe.isPublic ? '公開' : '私人' }}
+            </span>
+          </td>
+        </tr>
+        <tr v-if="mode === 'admin'">
+          <th scope="row" width="150" class="d-none d-sm-table-cell text-nowrap">編輯推薦</th>
+          <td>
+            <span
+              class="badge"
+              :class="{
+                'text-bg-primary text-white': tempRecipe.isRecommended,
+                'text-bg-light': !tempRecipe.isRecommended,
+              }"
+            >
+              {{ tempRecipe.isRecommended ? '是' : '否' }}
             </span>
           </td>
         </tr>

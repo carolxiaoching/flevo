@@ -1,10 +1,9 @@
 <script setup lang="ts">
-  import { Form } from 'vee-validate';
   import { ref, useTemplateRef } from 'vue';
   import { useRouter } from 'vue-router';
-  import { apiSignIn } from '@/api/front/users';
+  import { apiAdminSignIn } from '@/api/admin/adminUsers';
   import { setToken } from '@/utils/auth';
-  import { messageStore, loadingStore } from '@/stores/front';
+  import { messageStore, loadingStore } from '@/stores/admin';
   import type { AppErrorResponse } from '@/types/common';
 
   const router = useRouter();
@@ -20,26 +19,36 @@
     email: '',
     password: '',
   });
-  const formRef = useTemplateRef<InstanceType<typeof Form>>('formRef');
-  // 登入
-  async function signIn() {
+  const formRef = useTemplateRef<HTMLFormElement>('formRef');
+
+  // 管理員登入
+  async function adminSignIn() {
     openLoading();
 
     try {
-      const res = await apiSignIn(user.value);
-      const { data } = res.data;
-      // 設定 token
-      setToken(data.token);
-      // 重置表單
-      formRef.value?.resetForm();
-      // 顯示訊息
-      pushMessage({
-        style: 'success',
-        title: '登入成功',
-        text: '登入成功，將跳轉至首頁',
-      });
-      // 跳轉至首頁
-      router.push('/');
+      const res = await apiAdminSignIn(user.value);
+      const { status, data } = res.data;
+
+      if (status === 'success') {
+        // 設定 token
+        setToken(data.token);
+        // 重置表單
+        formRef.value?.resetForm();
+        // 顯示訊息
+        pushMessage({
+          style: 'success',
+          title: '登入成功',
+          text: '登入成功，將跳轉至管理頁面',
+        });
+        // 跳轉至後台首頁
+        router.push('/dashboard');
+      } else {
+        pushMessage({
+          style: 'danger',
+          title: '登入失敗',
+          text: '登入失敗，請重新登入',
+        });
+      }
       closeLoading();
     } catch (err) {
       pushMessage({
@@ -54,17 +63,23 @@
 </script>
 
 <template>
-  <section class="d-flex flex-wrap justify-content-center align-items-center my-17">
+  <nav class="text-center text-xl-start">
+    <router-link to="/" class="d-inline-block px-md-13 py-8">
+      <img src="../../assets/images/logo.svg" alt="logo" width="160" />
+    </router-link>
+  </nav>
+
+  <section class="d-flex flex-wrap justify-content-center align-items-center mb-17">
     <VForm
       class="accountForm bg-white rounded-3 shadow"
       v-slot="{ errors, meta }"
-      @submit="signIn"
+      @submit="adminSignIn"
       ref="formRef"
     >
-      <h1 class="mb-11 text-center h3">登入</h1>
-      <p class="mb-11 text-center text-muted lh-lg">
-        歡迎回到 燃味廚房，
-        <span class="d-block"> 一起探索更多美味與驚喜靈感吧！ </span>
+      <h1 class="mb-11 text-center h3">管理員介面</h1>
+      <p class="mb-15 text-center text-muted lh-lg">
+        歡迎來到 燃味廚房管理員介面，
+        <span class="d-block"> 請輸入管理員帳號與密碼登入 </span>
       </p>
       <p class="mb-11 py-11 alert alert-danger" v-if="errorMsg">
         <i class="bi bi-exclamation-triangle-fill me-4"></i>
@@ -111,12 +126,12 @@
         />
         <ErrorMessage name="密碼" class="text-danger" />
       </div>
-      <p class="mb-11 text-end">
+      <p class="mb-13 text-end">
         <router-link to="/forget-password" class="text-decoration-underline">
           忘記密碼？
         </router-link>
       </p>
-      <div class="mb-11 text-center">
+      <div class="text-center">
         <button
           type="submit"
           aria-disabled="true"
@@ -127,9 +142,10 @@
           立即登入
         </button>
       </div>
-      <router-link to="/signUp" class="d-block text-end text-decoration-underline">
-        還未註冊會員？立即註冊
-      </router-link>
     </VForm>
   </section>
 </template>
+
+<style lang="scss">
+  @import '@/assets/scss/admin.scss';
+</style>

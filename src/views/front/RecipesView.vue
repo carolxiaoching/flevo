@@ -1,11 +1,11 @@
 <script setup lang="ts">
-  import { ref, watch } from 'vue';
+  import { ref, watch, onMounted } from 'vue';
   import { storeToRefs } from 'pinia';
   import { useRoute, useRouter } from 'vue-router';
   import CardComponent from '@/components/front/CardComponent.vue';
   import PaginationComponent from '@/components/PaginationComponent.vue';
   import { apiGetRecipes } from '@/api/front/recipes';
-  import { messageStore, loadingStore, tagAndCategoryStore, userStore } from '@/stores';
+  import { messageStore, loadingStore, tagAndCategoryStore, userStore } from '@/stores/front';
   import type { Recipe } from '@/types/front/recipe';
   import type { AppErrorResponse, Pagination } from '@/types/common';
 
@@ -58,27 +58,24 @@
   watch(
     () => route.query,
     async newQuery => {
-      if (newQuery) {
-        if (!tags.value.length || !categories.value.length) {
-          await getTagsAndCategories();
-        }
+      const { keyword, category, tag } = newQuery;
 
-        const { keyword, category, tag } = route.query;
+      if (!keyword && !category && !tag) return;
 
-        if (keyword || category || tag) {
-          filter.value = {
-            sort: 'desc',
-            category: typeof category === 'string' ? category : '全部',
-            keyword: typeof keyword === 'string' ? keyword : '',
-            tags: tag ? [`${tag}`] : [],
-            page: 1,
-          };
-        }
-
-        getRecipes();
+      if (!tags.value.length || !categories.value.length) {
+        await getTagsAndCategories();
       }
+
+      filter.value = {
+        sort: 'desc',
+        category: typeof category === 'string' ? category : '全部',
+        keyword: typeof keyword === 'string' ? keyword : '',
+        tags: tag ? [`${tag}`] : [],
+        page: 1,
+      };
+
+      getRecipes();
     },
-    { immediate: true }, // 初始時也會執行一次
   );
 
   // 關鍵字搜尋
@@ -190,6 +187,27 @@
       closeLoading();
     }
   }
+
+  onMounted(async () => {
+    const { keyword, category, tag } = route.query;
+
+    if (!tags.value.length || !categories.value.length) {
+      await getTagsAndCategories();
+    }
+
+    // 如果初始就有 query 參數（例如從首頁帶過來），先更新 filter
+    if (keyword || category || tag) {
+      filter.value = {
+        sort: 'desc',
+        category: typeof category === 'string' ? category : '全部',
+        keyword: typeof keyword === 'string' ? keyword : '',
+        tags: tag ? [`${tag}`] : [],
+        page: 1,
+      };
+    }
+
+    getRecipes();
+  });
 </script>
 
 <template>
