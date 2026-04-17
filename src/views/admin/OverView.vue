@@ -136,8 +136,8 @@
 <template>
   <div class="container-fluid">
     <!-- 標題 -->
-    <div class="d-flex align-items-center justify-content-between mb-14">
-      <h1 class="h3 mb-0">控制台</h1>
+    <div class="d-flex flex-wrap align-items-center justify-content-between mb-14">
+      <h1 class="h3 mb-1 mb-sm-0">控制台</h1>
       <span class="text-muted fs-6">
         <i class="bi bi-calendar3 me-4"></i>
         {{
@@ -153,7 +153,7 @@
 
     <!-- 統計卡片 -->
     <div class="row g-8 g-lg-16 mb-16">
-      <div class="col-6 col-lg-3" v-for="(card, index) in statCards" :key="index">
+      <div class="col-12 col-sm-6 col-lg-3" v-for="(card, index) in statCards" :key="index">
         <div class="d-flex align-items-center gap-11 p-11 bg-white rounded shadow-sm h-100">
           <div
             class="flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle"
