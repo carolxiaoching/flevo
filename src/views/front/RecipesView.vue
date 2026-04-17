@@ -216,7 +216,7 @@
       <div
         class="recipesBannerOverLay d-flex justify-content-center align-items-center position-absolute top-0 bottom-0 start-0 end-0 p-8"
       >
-        <div class="recipesBannerContent text-center text-white">
+        <div class="text-center text-white">
           <h2 class="recipesBannerTitle mb-14 lh-base">
             美味相伴
             <span class="d-block">讓忙碌的生活更有滋味</span>
