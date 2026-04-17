@@ -1,0 +1,22 @@
+/* GenSenRounded */
+
+@font-face {
+  font-family: GenSenRounded;
+  src: url('fonts/GenSenRounded/GenSenRounded-R.ttc') format('collection');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: GenSenRounded;
+  src: url('fonts/GenSenRounded/GenSenRounded-L.ttc') format('collection');
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: GenSenRounded;
+  src: url('fonts/GenSenRounded/GenSenRounded-M.ttc') format('collection');
+  font-weight: 500;
+  font-display: swap;
+}
