@@ -34,7 +34,7 @@
       <span> 營養成分 </span>
     </h2>
     <div class="row g-8">
-      <div class="col-6 col-md-4">
+      <div class="col-12 col-sm-6 col-md-4">
         <label for="calories" class="form-label"> 總卡路里： </label>
         <VField
           type="number"
@@ -49,7 +49,7 @@
         />
         <ErrorMessage name="總卡路里" class="invalid-feedback" />
       </div>
-      <div class="col-6 col-md-4">
+      <div class="col-12 col-sm-6 col-md-4">
         <label for="protein" class="form-label"> 蛋白質： </label>
         <VField
           type="number"
@@ -64,7 +64,7 @@
         />
         <ErrorMessage name="蛋白質" class="invalid-feedback" />
       </div>
-      <div class="col-6 col-md-4">
+      <div class="col-12 col-sm-6 col-md-4">
         <label for="totalFat" class="form-label"> 總脂肪： </label>
         <VField
           type="number"
@@ -79,7 +79,7 @@
         />
         <ErrorMessage name="總脂肪" class="invalid-feedback" />
       </div>
-      <div class="col-6 col-md-4">
+      <div class="col-12 col-sm-6 col-md-4">
         <label for="totalCarb" class="form-label"> 總碳水化合物： </label>
         <VField
           type="number"
@@ -94,7 +94,7 @@
         />
         <ErrorMessage name="總碳水化合物" class="invalid-feedback" />
       </div>
-      <div class="col-6 col-md-4">
+      <div class="col-12 col-sm-6 col-md-4">
         <label for="sodium" class="form-label"> 鹽： </label>
         <VField
           type="number"
@@ -109,7 +109,7 @@
         />
         <ErrorMessage name="鹽" class="invalid-feedback" />
       </div>
-      <div class="col-6 col-md-4">
+      <div class="col-12 col-sm-6 col-md-4">
         <label for="sugar" class="form-label"> 醣類： </label>
         <VField
           type="number"

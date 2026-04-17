@@ -72,6 +72,7 @@
 
   onUnmounted(() => {
     window.removeEventListener('scroll', scrolling);
+    document.body.classList.remove('fixedNav');
   });
 </script>
 

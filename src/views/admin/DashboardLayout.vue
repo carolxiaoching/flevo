@@ -21,6 +21,12 @@
     });
     router.push('/admin-signin');
   }
+
+  // 在路由切換後移除 offcanvas 在 body 上添加的 overflow 和 padding-right 樣式
+  router.afterEach(() => {
+    document.body.style.removeProperty('overflow');
+    document.body.style.removeProperty('padding-right');
+  });
 </script>
 
 <template>

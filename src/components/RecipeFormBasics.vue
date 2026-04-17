@@ -69,8 +69,8 @@
       </span>
       <span> 基本設定 </span>
     </h2>
-    <div class="d-flex align-items-center mb-8">
-      <label for="isPublic" class="form-label mb-0 me-16" style="min-width: 200px">
+    <div class="d-flex flex-wrap justify-content-center align-items-center mb-8">
+      <label for="isPublic" class="form-label mb-4 mb-md-0 me-md-16" style="min-width: 200px">
         是否公開食譜：
       </label>
       <div class="form-check form-switch ps-0">
@@ -88,25 +88,23 @@
         </label>
       </div>
     </div>
-    <div v-if="mode === 'admin'" class="d-flex align-items-center">
-      <label for="isRecommended" class="form-label mb-0 me-16" style="min-width: 200px">
+    <div v-if="mode === 'admin'" class="d-flex flex-wrap justify-content-center align-items-center">
+      <label for="isRecommended" class="form-label mb-4 mb-md-0 me-md-16" style="min-width: 200px">
         編輯推薦：
       </label>
       <div class="form-group form-check ps-0">
-        <div class="form-check form-switch">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            role="switch"
-            id="isRecommended"
-            v-model="tempRecipe.isRecommended"
-            :true-value="true"
-            :false-value="false"
-          />
-          <label class="form-check-label align-middle" for="isRecommended">
-            {{ tempRecipe.isRecommended ? '推薦' : '不推薦' }}
-          </label>
-        </div>
+        <input
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          id="isRecommended"
+          v-model="tempRecipe.isRecommended"
+          :true-value="true"
+          :false-value="false"
+        />
+        <label class="form-check-label align-middle" for="isRecommended">
+          {{ tempRecipe.isRecommended ? '推薦' : '不推薦' }}
+        </label>
       </div>
     </div>
   </div>

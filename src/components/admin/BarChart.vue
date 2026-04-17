@@ -23,6 +23,10 @@
       categories: props.categories,
       labels: {
         style: { fontSize: '13px' },
+        rotate: -30,
+        hideOverlappingLabels: true,
+        trim: true, // 過長文字裁切
+        maxHeight: 60,
       },
     },
     yaxis: {
