@@ -13,15 +13,6 @@
   background: rgba($dark, 0.3);
 }
 
-.recipesBannerContent {
-  @include media-breakpoint-up(sm) {
-    min-width: 32rem;
-  }
-  @include media-breakpoint-up(lg) {
-    min-width: 38rem;
-  }
-}
-
 .recipesBannerTitle {
   text-shadow: 1px 0 10px $dark;
   font-size: 1.75rem;
