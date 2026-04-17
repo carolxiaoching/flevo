@@ -2,7 +2,7 @@
 
 .hero {
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .heroBgPath {
@@ -22,7 +22,6 @@
   right: 0;
   @include media-breakpoint-up(xl) {
     bottom: -5rem;
-    min-width: 75rem;
   }
 }
 
