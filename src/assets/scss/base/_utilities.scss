@@ -1,0 +1,56 @@
+// 通用樣式
+
+.textLs {
+  letter-spacing: 0.25rem;
+}
+
+.textLsSm {
+  letter-spacing: 0.125rem;
+}
+
+.textLsLg {
+  letter-spacing: 0.5rem;
+}
+
+.backgroundCover {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.cursorPoint {
+  cursor: pointer;
+}
+
+.textClamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  height: 4.5rem;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
+}
+
+.textClampSm {
+  -webkit-line-clamp: 2;
+  height: 3rem;
+}
+
+.textClampLg {
+  -webkit-line-clamp: 5;
+  height: 7.5rem;
+}
+
+.thumbnail {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  background-color: $light;
+  border-radius: 0.25rem;
+  text-align: center;
+  color: $white;
+  font-size: 2rem;
+  line-height: 3rem;
+  object-fit: cover;
+  object-position: center;
+}

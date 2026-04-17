@@ -1,0 +1,29 @@
+.sidebar {
+  @include media-breakpoint-up(xl) {
+    position: fixed;
+    width: 18rem;
+    min-height: 100vh;
+  }
+}
+
+.menuLink {
+  background: rgba($secondary, 0.2);
+
+  &:hover,
+  &:focus {
+    color: $dark;
+    background: rgba($secondary, 0.5);
+  }
+  &.active {
+    background: $secondary;
+    color: $white;
+  }
+}
+
+.adminMain {
+  min-height: calc(100vh - 3.375rem);
+  @include media-breakpoint-up(xl) {
+    margin-left: 18rem;
+    min-height: 100vh;
+  }
+}

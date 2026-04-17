@@ -1,0 +1,9 @@
+.toastContainer {
+  position: fixed;
+  right: 50%;
+  transform: translateX(50%);
+  @include media-breakpoint-up(md) {
+    right: 0;
+    transform: translateX(0);
+  }
+}
