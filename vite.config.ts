@@ -30,6 +30,31 @@ export default defineConfig({
           // substr 是被淘汰語法，因此要改 slice
           return driveLetter + name.slice(driveLetter.length).replace(INVALID_CHAR_REGEX, '');
         },
+        // 將第三方套件獨立打包，提升瀏覽器快取效率
+        manualChunks(id) {
+          if (id.includes('apexcharts') || id.includes('vue3-apexcharts')) {
+            return 'vendor-charts';
+          }
+          if (id.includes('swiper')) {
+            return 'vendor-swiper';
+          }
+          if (id.includes('gsap')) {
+            return 'vendor-gsap';
+          }
+          if (id.includes('bootstrap')) {
+            return 'vendor-bootstrap';
+          }
+          if (id.includes('vee-validate') || id.includes('@vee-validate')) {
+            return 'vendor-form';
+          }
+          if (
+            id.includes('node_modules/vue') ||
+            id.includes('node_modules/pinia') ||
+            id.includes('node_modules/vue-router')
+          ) {
+            return 'vendor-vue';
+          }
+        },
       },
     },
   },
