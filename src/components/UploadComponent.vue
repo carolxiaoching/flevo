@@ -97,7 +97,7 @@
     <div class="position-relative mb-11 mb-xl-17 border rounded-3">
       <a
         href="#"
-        class="previewResetBtn position-absolute top-0 right-0 px-2 text-white fs-2"
+        class="previewResetBtn position-absolute top-0 end-0 px-2 text-white fs-2"
         @click.prevent="resetImage()"
       >
         <i class="bi bi-x"></i>
