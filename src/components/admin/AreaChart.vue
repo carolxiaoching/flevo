@@ -32,6 +32,12 @@
     tooltip: { enabled: false },
     xaxis: {
       categories: monthArray.map(item => `${item.year}/${item.month}`),
+      tickAmount: 6, // 限制最多顯示幾個刻度
+      labels: {
+        rotate: -45, // 標籤旋轉避免重疊
+        rotateAlways: false,
+        hideOverlappingLabels: true, // 自動隱藏重疊標籤
+      },
     },
   });
 
