@@ -2,7 +2,6 @@
 
 .hero {
   min-height: 100vh;
-  overflow-x: hidden;
 }
 
 .heroBgPath {
@@ -29,8 +28,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  max-width: 24rem;
-  transform: rotate(-10deg);
+  width: 100%;
   z-index: -1;
   @include media-breakpoint-up(sm) {
     max-width: 30rem;
