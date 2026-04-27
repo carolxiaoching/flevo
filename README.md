@@ -9,7 +9,7 @@
   ·
   <a href="https://carolxiaoching.github.io/flevo/#/admin-signin">後台 Demo</a>
   ·
-  <a href="https://github.com/carolxiaoching/msc-backend">後端 Repo</a>
+  <a href="https://github.com/carolxiaoching/flevo-backend">後端 Repo</a>
 </p>
 
 <p align="center">
